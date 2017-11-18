@@ -140,6 +140,30 @@ a function only has direct memory access to values on its own stack frame. so ho
 through pointer access. in this context, "u" is a pointer to a value on the heap
 
 
+engineering decision:
+- should we be using Value Semantics or Pointer Semantics?
+- type drives the semantic, everything else follows
+
+reasons why a value could allocate:
+- compiler determines the size of every stack frame at compile time.
+- if compiler doesn't know the size of a value at compile time, it can't be placed on the stack
+- what happens when you run out of stack space? go uses contiguous stacks. it will create a new stack, ~ 25% greater in size. but everything from the old stack has to be copied to the new stack - which means values on stacks can potentially have a new location
+
+example of stack-hopping:
+https://play.golang.org/
+
+change "const size = 10" --> const size = 1024 and re-run:
+string changes memory location
+
+no go-routine can have a pointer to another go-routines stack. stacks are exclusive. to share info between go-routines, that info has to end up on the heap
+
+ 
+
+
+
+
+
+
 
 
 
