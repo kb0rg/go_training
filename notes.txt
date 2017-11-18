@@ -1,0 +1,106 @@
+day one
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/courses/go
+
+MECHANICAL SYMPATHY
+the model is the machine: remember the hardware is our platform.
+sympatheitc to the hardware.
+
+engineering is about understanding the decisions you're making, the costs you're taking
+
+MAKE SURE YOUR MENTAL MODEL IS CLEAR
+
+dedicate time every sprint to refactoring.
+
+logs > debuggers
+debugger can become a crutch. in production can't use debugger, can only rely on logs. if logs aren't enough to diagnose a problem in dev, they're not going to be good enough in prod.
+
+more important than performance? 
+productivity
+
+
+MORE IMPORTANT TO LEARN HOW TO READ CODE THAN WRITE
+
+correctness vs performance
+until you have a working program you really *don't know* how performant it will be. 
+get working code first. make it readable (think about: what is the legacy you're leaving behind?)
+
+we only learn when we make mistakes
+
+INTEGRITY
+
+become very serious about reliability.
+
+- every allocation, read, and write of memory should be consistent and efficient
+- every problem we solve is a data transformation, every transformation should be consistent and efficient
+
+if software loses integrity, it's moral imperitive to shut it down
+
+WRITE LESS CODE
+
+every 1000 lines of code has 15-50 bugs.
+every 20 lines has a bug
+to reduce bugs? reduce amount of code
+
+EVERY DAY: REVIEW. REFACTOR.
+
+ERROR HANDLING
+
+if error handling is treated as an exception and not part of main code, majority of critical failures are due to error handling
+
+READABILITY
+
+simple code that is easy to read and understabd.
+not hiding the impact the cost the code is having
+
+SIMPLICITY
+
+is about hiding complexity -- is this at odds with readability?
+
+PERFORMANCE
+
+must compute less to get the results we need
+
+
+types. without type there can be no integrity
+
+
+
+POINTERS
+https://github.com/ardanlabs/gotraining/blob/master/topics/go/language/pointers/README.md
+
+
+main go routine
+thread is a path of execution scheduled on a core
+every go routine is given a piece of memory called the stack
+
+three types of memory: 
+- data segment (not relevant to this course)
+- stack
+- heap
+
+go routine (a co-routine) operates on the stack. each stack = 2k
+stack frame: frame of memory taken off the stack
+
+PASS BY VALUE example:
+https://play.golang.org/p/JJMHWiZ9h9
+
+
+function call crosses over a program boundary. gets its own frame. data the function needs has to be inside that frame, or it won't have access to it. needs its own copy of data in order to operate
+
+(implementation detail: stacks work down in go)
+
+address of data in function frame will be lower in memory than address of original var, because it's in a lower stack frame
+
+all memory above (and including) active stack frame is valid
+anything below is invalid
+when we return from a function, move the active frame back up.
+
+stacks are cheap to use bc they are self-cleaning, garbage collector doesn't have to get involved
+
+every function call moves the stack down. 
+
+ 
+
+
+
