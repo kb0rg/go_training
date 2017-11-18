@@ -227,7 +227,7 @@ row traversal: predictable access patterns. contiguous memory
 
 what data structure you choose impacts performance
 
-in go, "slice" == array == predictable memory access pattern, so slice should be heavily relied upon in go
+in go, "slice" (== array ??) == predictable memory access pattern, so slice should be heavily relied upon in go
 as core data structure:
 arrays are mechanically sympathetic to the hardware.
 
@@ -269,4 +269,38 @@ Change in semantics can change the outcome of the program.
 THINK ABOUT which semantics you need
 
 DO NOT MIX SEMANTICS. 
+
+
+Arrays vs Slices:
+https://github.com/ardanlabs/gotraining/tree/master/topics/go/language/slices
+
+size of an array is part of its type information
+slice has an array-like syntax
+(? there is no value when setting the slice with make ?) 
+
+slice is a THREE-word data structure:
+- first word is an address (pointer to backing array)
+- second is the length of slice (# of elements you can read and write to)
+- capacity (total # of elements that exist from that position) - there for efficient growth. can not access an index of a slice beyond its current length.
+
+gives us the mechanical sympathies of an array, plus flexibility, room for growth.
+
+syntactic sugar makes slice *look* like an array
+
+EMPTY VS NIL
+
+empty != nil
+(revisit this)
+
+- nil slice is still a 3-word data structure. all 3 parts are set to 0 (nil, 0, 0)
+
+- empty literal does not create a zero-value slice, it creates an *empty* slice: (pointer, 0, 0). 
+pointer in an empty slice points to EmptyStruct
+
+using var guarantees a zero value. 
+
+recommend using value semantics when working with slices
+
+slice append uses value semantics: does not mutate a shared array. append api uses value semantics. mutates and returns a new copy.
+
 
