@@ -157,16 +157,31 @@ string changes memory location
 
 no go-routine can have a pointer to another go-routines stack. stacks are exclusive. to share info between go-routines, that info has to end up on the heap
 
- 
+it is ok for heap allocation to happen, sometimes it needs to happen. there are cases when you can write zero-allocation algorithms, but you will not be writing zero-allocation code. 
 
+GARBAGE COLLECTION
 
+the heart of go's garbage collection is its pacing.
+GOGC variable: don't play with that unless you *really* understand the engineering decision you're making
 
+trades performance for low latency.
 
+if you grow the heap, the GC has to run more.
+GC tries to keep the Live heap approx half size of heap itself.
 
+GC has its own set of go routines. can eat up to 25% of available CPU while it's running.
 
+go-routines that are producing more garbage may be co-opted to collect garbage for the other routines
 
+heap is a graph of values, connected to each other by pointers
 
+mark & sweep:
+black: in use
+white: not in use
+gray: re-scan (removed in v 1.8)
 
-
-
+what is a memory leak in go?
+- creating extra go routines, not in use, that are holding onto their references?
+- forget to call close?
+- just start commenting out code, see where the allocations stop.
 
