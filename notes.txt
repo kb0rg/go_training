@@ -235,3 +235,38 @@ arrays are mechanically sympathetic to the hardware.
 
 go wants to push you in the direction of mechanical sympathy with the hardware you're on
 
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/go/language/arrays
+
+^ cache diagrams
+
+
+DATA-ORIENTED DESIGN PHILOSOPHY
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/go#data-oriented-design
+
+OOP is not efficient in go. parent/ child relationships create trees, but in go "you don't have a VM to save your ass"
+
+IF YOU DON'T UNDERSTAND THE DATA YOU'RE WORKING WITH, YOU DON'T UNDERSTAND THE PROBLEM
+
+a string in go is a two-word data structure:
+- first word is an address (pointer to some array of bytes), second is the number bytes
+- often initialized as 0
+- strings can be placed on stacks, bc we know the size
+
+https://play.golang.org/p/wUzREuHhLY
+
+Pointer Semantics/ Value Semantics
+
+iterating over the for/ range:
+creates multiple copies of the Pointer to the string's value (backing array?), while the string value itself has only one copy in the heap. sharing the pointers like this keeps the heap clean.
+
+Value semantics w/ for range ranges over its own COPY of the array, not the array itself. 
+
+Pointer Semantics ranges over the pointers, always points to the same value.
+
+Change in semantics can change the outcome of the program. 
+THINK ABOUT which semantics you need
+
+DO NOT MIX SEMANTICS. 
+
