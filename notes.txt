@@ -185,3 +185,53 @@ what is a memory leak in go?
 - forget to call close?
 - just start commenting out code, see where the allocations stop.
 
+
+
+CACHE
+
+(benchmarking examples to illustrate):
+https://github.com/ardanlabs/gotraining/tree/master/topics/go/testing/benchmarks
+
+example code creates a matrix & a linked list
+
+run benchmarking on same code applied to:
+linked list traverse - slow but consistent
+matrix column traverse - slow, inconsistent
+matrix row traverse - consistently MUCH faster than the other two
+
+
+(watch Scott Meyers videos)
+https://github.com/ardanlabs/gotraining/blob/master/topics/go/language/arrays/README.md
+
+main memory is slow. 
+if performance matters, effective memory == CPU cache memory
+
+everything in L1 & L2 also in L3 cache
+
+small is fast
+
+caches are in place to hide latency cost of accessing from main memory. but the info needs to be in the cache ahead of when it's needed, or you'll hit main anyway.
+
+pre-fetchers actively fetch items to put in the cache
+create a predictable access pattern in your code
+array is the most important ds we have today as it relates to the hardware: walking the array is a predictable stride
+
+TLB cache?
+creates mapping betw virtal memory and physical memory
+(* revisit this re paging *)
+
+back to example:
+linked list: decent chance data is on same page
+column traversal: most likely uses different pages
+row traversal: predictable access patterns. contiguous memory
+
+what data structure you choose impacts performance
+
+in go, "slice" == array == predictable memory access pattern, so slice should be heavily relied upon in go
+as core data structure:
+arrays are mechanically sympathetic to the hardware.
+
+(not always true -- but true often enough)
+
+go wants to push you in the direction of mechanical sympathy with the hardware you're on
+
