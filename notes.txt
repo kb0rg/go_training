@@ -19,6 +19,8 @@ more important than performance?
 productivity
 
 
+
+
 MORE IMPORTANT TO LEARN HOW TO READ CODE THAN WRITE
 
 correctness vs performance
@@ -85,6 +87,7 @@ stack frame: frame of memory taken off the stack
 PASS BY VALUE example:
 https://play.golang.org/p/JJMHWiZ9h9
 
+(*get in the habit of drawing stack frames*)
 
 function call crosses over a program boundary. gets its own frame. data the function needs has to be inside that frame, or it won't have access to it. needs its own copy of data in order to operate
 
@@ -100,7 +103,46 @@ stacks are cheap to use bc they are self-cleaning, garbage collector doesn't hav
 
 every function call moves the stack down. 
 
- 
+pointers serve one function: sharing.
+
+pointer variables allow us to store address. 
+(pointers are not a named type. they are a literal)
+they all store the same type of value: an address
+
+(same example modified to use pointer):
+https://play.golang.org/p/y_FHIdUbAw
+
+(? clarify this? )
+"*" in func signature denotes ...
+"*" in func call denotes ...
+
+run in go playground to note address of pointer does not change as value of pointer changes
+
+
+factory function:
+https://play.golang.org/p/KRKrUCcTYe
+
+creates a value and initializes for use, returns that value back
+
+v2 uses pointers:
+https://play.golang.org/p/VoQBQk8ijj
+
+go compiler performs escape analysis:
+- determines whether a value gets to stay on the stack, or whether it has to escape
+
+line 42 we construct a value, but construction tells us nothing about where value will end up (stack or heap)
+
+default is to put it on the stack, but we can't always do that.
+
+line 49 is where we indicate we should share this value up the call stack. escape analysis determines we can't leave the value on the call stack: it goes to the heap.
+
+a function only has direct memory access to values on its own stack frame. so how does it access values on the heap?
+through pointer access. in this context, "u" is a pointer to a value on the heap
+
+
+
+
+
 
 
 
