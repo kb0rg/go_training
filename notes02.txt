@@ -36,7 +36,30 @@ type doesn't matter.
 you pass any concrete data into interfaces, as long as the data satisfies the contract that the interface expects.
 
 
+nil can only be a pointer set to zero value or a reference type set to zero value.
+nil always takes on the type it needs. 
+
+using nil for error checking: err != nil means there is no error value stored
+
+don't use else: do your negative path processing inside the ifs
 
 
+don't use logging as an insurance policy
+logging is expensive. uses allocation, therefore adding garbage to the heap. just log the things you absolutely need. 
+
+guidelines for when/ where to log:
+- if you can say the logs serve one purpose (debugging)
+
+improve the signal/ noise ratio in your logs
+
+logging should happen where the error handling happens. each step lower in the stack should wrap the error in some context before passing it up the stack.
+
+errors package does this context wrapping:
+github.com/pkg/errors
+
+Cause function unwinds the wrapper to get the context, produces the stack trace
+
+example here:
+https://play.golang.org/p/VfqgeCH-v2
 
 
