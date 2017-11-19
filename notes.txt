@@ -304,3 +304,54 @@ recommend using value semantics when working with slices
 slice append uses value semantics: does not mutate a shared array. append api uses value semantics. mutates and returns a new copy.
 
 
+
+HOW DO YOU DETECT CODE SMELL?
+
+you need a vocabulary to be able to express what your gut tells you is a red flag
+
+built-in function append() is *almost always* a red flag
+
+
+[...]
+http://gph.is/1qSfRhX
+[...]
+
+
+METHODS
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/go/language/methods
+
+receiver binds method to a type
+(eg "self" in python -- is a pointer receiver. in go you can name it yourself. should be short and refer to the type)
+
+(pointer receiver: uses pointer semantics -- code smell)
+
+two exceptions: unmarshalling and decoding always use pointer semantics
+
+examples value vs pointer semantics:
+https://play.golang.org/p/cyXulaDNL9
+
+not all data is copiable. if you don't know, use pointer semantics. 
+
+when it's clear, use value semantics (built-in types, reference types)
+
+methods are syntactic sugar (for ...?)
+methods allow a piece of data to have a capability.
+should be an exception, not the rule.
+
+
+MISC:
+
+-> interface pollution: if the added value of the interface does not offset the cost of indirection & allocation
+
+
+-> if you understand the semantic you can reason how the codebase will perform
+
+-> if you can maintain consistency, your codebase can grow, without having to guess.
+
+
+Polymorphism:
+a program or function behaves differently depending on the data it's operating on
+
+
+
