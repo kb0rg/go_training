@@ -1,0 +1,42 @@
+day two
+
+
+EMBEDDING/ DECOUPLING
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/go/language/embedding
+
+
+https://play.golang.org/p/7Ei_9niqPQ
+embedding a value of type user inside values of type admin
+think of it as outer/ inner type
+
+inner type promotion:
+can access the inner value directly, can ALSO access the inner value's method in the outer type
+
+outer type can satisfy same contracts as outer types
+
+inner type promotion doesn't happen until you access something from the outer type
+
+embedding != OOP
+we embed a type bc we want that type's behavior
+(if we want to group data by some common dna, that dna has to be configured.
+stop thinking about trying to group things by common state)
+
+get things working in the concrete before creating interfaces. 
+refactoring: process of asking yourself "how do we decouple this"?
+solve one problem at a time
+only add complexity as you need to, not before
+
+
+COMPOSITION
+https://github.com/ardanlabs/gotraining/blob/master/topics/go/design/composition/README.md
+
+interface types are valueless.
+type doesn't matter.
+you pass any concrete data into interfaces, as long as the data satisfies the contract that the interface expects.
+
+
+
+
+
+
