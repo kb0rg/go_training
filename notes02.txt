@@ -63,3 +63,28 @@ example here:
 https://play.golang.org/p/VfqgeCH-v2
 
 
+CONCURRENCY
+
+https://github.com/ardanlabs/gotraining/tree/master/topics/courses/go/concurrency
+
+thread is a path of execution
+
+can be in one of 3 basic states:
+executing
+runnable
+waiting
+
+context switches are expensive. create a state of latency
+
+NUMA: 
+non-uniform memory access
+gives every proc its own local bank of memory
+solves the scale issue, but causes the issue of unknown latency to main memory.
+usually a non-issue until you're dealing with huge quantities of data
+
+scheduler has to understand about NUMA to make sure everything is running as efficiently as possible. 
+
+
+
+
+
